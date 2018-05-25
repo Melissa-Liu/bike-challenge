@@ -22,4 +22,12 @@ class ItemCounter:
         self.end_time.append(ride.end_time)
         self.orig_item[self.ride_cnt] = ride.items
         self.ride_cnt = self.ride_cnt+1
-        
+    
+    def _add_time(self, new_time):
+        # Helper function to add time interval into sorted list
+        time_index = bisect.bisect(self.intervals, new_time)
+        if (time_index > 0):
+            if (self.intervals[time_index - 1] != new_time):
+                self.intervals.insert(time_index, new_time)
+        else:
+            self.intervals.insert(time_index, new_time)
