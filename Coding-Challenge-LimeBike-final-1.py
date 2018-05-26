@@ -46,6 +46,9 @@ class ItemCounter:
         return new_items
 
     def print_items_per_interval(self):
+        # Generates items per interval based on the sorted intervals 
+        # by adding the new items to the time interval before it
+        # Then prints the report items per time interval
         for i in range(0, len(self.intervals) - 1):
             self.item_counter[i] = {}
             for j in range(0, self.ride_cnt):
