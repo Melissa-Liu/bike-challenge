@@ -31,3 +31,32 @@ class ItemCounter:
                 self.intervals.insert(time_index, new_time)
         else:
             self.intervals.insert(time_index, new_time)
+
+    def _add_items(self, old_items, items):
+        # Helper function to add two item dictionaries
+        new_items = {}
+        for key in old_items:
+            if key in items:
+                new_items[key] = old_items[key] + items[key]
+            else:
+                new_items[key] = old_items[key]
+        for key in items:
+            if key not in old_items:
+                new_items[key] = items[key]
+        return new_items
+
+    def print_items_per_interval(self):
+        for i in range(0, len(self.intervals) - 1):
+            self.item_counter[i] = {}
+            for j in range(0, self.ride_cnt):
+                if (self.intervals[i] >= self.start_time[j] and self.intervals[i] < self.end_time[j]):
+                    self.item_counter[i] = self._add_items(self.orig_item[j], self.item_counter[i])
+        
+        print 'Items per Interval Report:\n' 
+        for i in range(0, len(self.intervals)-1):
+            if self.item_counter[i]:
+                print self.intervals[i] + ' - ' + self.intervals[i+1] + ' -> '
+            for key in self.item_counter[i]:
+                print('             %s = %s' % (key, self.item_counter[i][key]))
+
+
