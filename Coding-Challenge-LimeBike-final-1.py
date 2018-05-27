@@ -63,3 +63,62 @@ class ItemCounter:
                 print('             %s = %s' % (key, self.item_counter[i][key]))
 
 
+
+# Tests
+
+# manually tested using console outputs
+
+class Ride:
+    """Ride class for testing.
+
+    Assume ride object with `start_time`, `end_time`, and `item` attributes 
+    where `start_time` and `end_time` are datetime strings and item is a 
+    dict with format {`item_name`: `item_count`}. 
+    """
+    
+    def __init__(self):
+        self.start_time = 0
+        self.end_time = 0
+        self.items = {}
+
+
+itemList0 = {'apple': 2, 'brownie': 1, 'pear': 4}
+itemList1 = {'apple': 1, 'carrot': 3}
+itemList2 = {}
+itemList3 = {'book': 1, 'banana': 2, 'diamond': 4, 'pear': 1}
+itemList4 = {'book': 1, 'banana': 2, 'diamond': 4}
+itemList5 = {'banana': 1}
+
+myRide0 = Ride()
+myRide0.start_time = '2018:05:29:07:00:00'
+myRide0.end_time = '2018:05:29:07:30:00'
+myRide0.items = itemList0
+
+myRide1 = Ride()
+myRide1.start_time = '2018:05:29:07:10:00'
+myRide1.end_time = '2018:05:29:08:00:00'
+myRide1.items = itemList1
+
+myRide2 = Ride()
+myRide2.start_time = '2018:05:29:07:20:00'
+myRide2.end_time = '2018:05:29:07:45:00'
+myRide2.items = itemList2
+
+itemCntList = ItemCounter()
+itemCntList.process_ride(myRide0)
+itemCntList.process_ride(myRide1)
+itemCntList.process_ride(myRide2)
+itemCntList.process_ride(myRide3)
+itemCntList.process_ride(myRide4)
+itemCntList.process_ride(myRide5)
+itemCntList.print_items_per_interval()
+
+# 7 intervals, 6 printed intervals, 8 interval times
+assert (len(itemCntList.intervals) == 8)
+
+# Interval with no items
+assert not (itemCntList.item_counter[5])
+
+
+
+
