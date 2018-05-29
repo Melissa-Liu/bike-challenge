@@ -109,6 +109,11 @@ myRide3.start_time = '2018:05:29:07:35:00'
 myRide3.end_time = '2018:05:29:08:00:00'
 myRide3.items = itemList3
 
+myRide4 = Ride()
+myRide4.start_time = '2018:05:29:08:15:00'
+myRide4.end_time = '2018:05:29:08:30:00'
+myRide4.items = itemList4
+
 itemCntList = ItemCounter()
 itemCntList.process_ride(myRide0)
 itemCntList.process_ride(myRide1)
